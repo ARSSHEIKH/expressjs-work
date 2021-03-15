@@ -5,14 +5,14 @@ const app = express();
 //for partials
 const hbs = require('hbs')
 
-const templatePath = path.join(__dirname, "../templates")
-const partialsPath = path.join(__dirname, "../templates/partials")
+const templatePath = path.join(__dirname, "./templates/views")
+const partialsPath = path.join(__dirname, "./templates/partials")
 // to set the view engine
 app.set("view engine", "hbs");
 
 // Change the dafault folder of hbs that is views
 // i.e: here I have change it to templates
-app.set("views", "templates");
+app.set("views", templatePath);
 
 // partials
 hbs.registerPartials(partialsPath)
@@ -29,6 +29,12 @@ app.get("/", (req, res)=>{
         variableName: "Index.hbs"
     })
 })
+app.get("/about", (req, res)=>{
+    res.render("about",{
+        variableName: "about.hbs"
+    })
+})
+
 app.listen(4000, ()=>{
     console.log("Server is Running on http://localhost:4000/")
 })
